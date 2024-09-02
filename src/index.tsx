@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { registerChartComponents } from "./ChartConfig";
+
+// 註冊 Chart.js 組件
+registerChartComponents();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
