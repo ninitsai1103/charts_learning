@@ -1,4 +1,4 @@
-import React from "react";
+import { useRef } from "react";
 import {
   Line,
   Bar,
@@ -9,10 +9,92 @@ import {
   Scatter,
   PolarArea,
 } from "react-chartjs-2";
-import { ChartData } from 'chart.js';
+import { ChartData, Chart as ChartJS } from "chart.js";
 
 export default function Chart(): JSX.Element {
-  const chartData: ChartData<'line'|'bar', number[]> = {
+  const chartRef = useRef<ChartJS<"line"> | null>(null);
+  //   const chartData = {
+  //     labels: ["A", "B", "C", "D", "E"],
+  //     datasets: [
+  //       {
+  //         label: "label1",
+  //         backgroundColor: "rgba(154,178,96,0.5)",
+  //         hoverBackgroundColor: "rgba(154,178,96,1)",
+  //         data: [1000, 1015, 1015, 1081, 1055],
+  //       },
+  //     ],
+  //   };
+  const chartData2: ChartData<"bubble", { x: number; y: number; r: number }[]> =
+    {
+      labels: ["A", "B", "C"],
+      datasets: [
+        {
+          label: "label2",
+          backgroundColor: "rgba(255,99,132,0.5)",
+          hoverBackgroundColor: "rgba(255,99,132,1)",
+          data: [
+            {
+              x: 0,
+              y: 0,
+              r: 10,
+            },
+            {
+              x: 1,
+              y: 1,
+              r: 30,
+            },
+            {
+              x: 2,
+              y: 2,
+              r: 50,
+            },
+          ],
+        },
+      ],
+    };
+  const chartData3 = {
+    labels: ["A", "B", "C"],
+    datasets: [
+      {
+        label: "label3",
+        backgroundColor: "rgba(255,99,132,0.5)",
+        hoverBackgroundColor: "rgba(255,99,132,1)",
+        data: [
+          {
+            x: 0,
+            y: 0,
+          },
+          {
+            x: 1,
+            y: 1,
+          },
+          {
+            x: 2,
+            y: 2,
+          },
+        ],
+      },
+    ],
+  };
+
+  const chartData4 = {
+    labels: ["A", "B", "C", "D", "E", "F", "G"],
+    datasets: [
+      {
+        label: "label1",
+        backgroundColor: "rgba(333,178,96,0.5)",
+        hoverBackgroundColor: "rgba(333,178,96,1)",
+        data: [510, 615, 1215, 1481, 1055, 500, -1100],
+      },
+      {
+        label: "label2",
+        backgroundColor: "rgba(111,99,132,0.5)",
+        hoverBackgroundColor: "rgba(111,99,132,1)",
+        data: [-510, -615, -1215, -1481, -1055, -500, 1100],
+      },
+    ],
+  };
+  const chartData5: ChartData<"polarArea", number[]> = {
     labels: ["A", "B", "C", "D", "E"],
     datasets: [
       {
@@ -23,125 +105,55 @@ export default function Chart(): JSX.Element {
       },
     ],
   };
-  const chartData2: ChartData <'bubble', { x: number; y: number; r: number }[]>  = {
-      labels: ["A", "B", "C"],
-      datasets: [
-          {
-              label: "label2",
-              backgroundColor: "rgba(255,99,132,0.5)",
-              hoverBackgroundColor: "rgba(255,99,132,1)",
-              data: [
-                  {
-                      x: 0,
-                      y: 0,
-                      r: 10,
-                    },
-                    {
-                        x: 1,
-                        y: 1,
-                        r: 30,
-                    },
-                    {
-                        x: 2,
-                        y: 2,
-                        r: 50,
-                    },
-                ],
-            },
-        ],
-    };
-    const chartData3 = {
-        labels: ["A", "B", "C"],
-        datasets: [
-            {
-                label: "label3",
-                backgroundColor: "rgba(255,99,132,0.5)",
-                hoverBackgroundColor: "rgba(255,99,132,1)",
-                data: [
-                    {
-                        x: 0,
-                        y: 0,
-                    },
-                    {
-                        x: 1,
-                        y: 1,
-                    },
-                    {
-                        x: 2,
-                        y: 2,
-                    },
-                ],
-            },
-        ],
-    };
-    
-    const chartData4 = {
-        labels: ["A", "B", "C", "D", "E", "F", "G"],
-        datasets: [
-            {
-                label: "label1",
-                backgroundColor: "rgba(333,178,96,0.5)",
-                hoverBackgroundColor: "rgba(333,178,96,1)",
-                data: [510, 615, 1215, 1481, 1055, 500, -1100],
-            },
-            {
-                label: "label2",
-                backgroundColor: "rgba(111,99,132,0.5)",
-                hoverBackgroundColor: "rgba(111,99,132,1)",
-                data: [-510, -615, -1215, -1481, -1055, -500, 1100],
-            },
-        ],
-    };
-    const chartData5: ChartData<'polarArea', number[]> = {
-      labels: ["A", "B", "C", "D", "E"],
-      datasets: [
-        {
-          label: "label1",
-          backgroundColor: "rgba(154,178,96,0.5)",
-          hoverBackgroundColor: "rgba(154,178,96,1)",
-          data: [1000, 1015, 1015, 1081, 1055],
-        },
-      ],
-    };
-    const chartData6: ChartData<'pie', number[]> = {
-        labels: ["A", "B", "C", "D", "E"],
-        datasets: [
-          {
-            label: "label1",
-            backgroundColor: "rgba(154,178,96,0.5)",
-            hoverBackgroundColor: "rgba(154,178,96,1)",
-            data: [1000, 1015, 1015, 1081, 1055],
-          },
-        ],
-      };
-      const chartData7: ChartData<'doughnut', number[]> = {
-        labels: ["A", "B", "C", "D", "E"],
-        datasets: [
-          {
-            label: "label1",
-            backgroundColor: "rgba(154,178,96,0.5)",
-            hoverBackgroundColor: "rgba(154,178,96,1)",
-            data: [1000, 1015, 1015, 1081, 1055],
-          },
-        ],
-      };
-      const chartData8: ChartData<'radar', number[]> = {
-        labels: ["A", "B", "C", "D", "E"],
-        datasets: [
-          {
-            label: "label1",
-            backgroundColor: "rgba(154,178,96,0.5)",
-            hoverBackgroundColor: "rgba(154,178,96,1)",
-            data: [1000, 1015, 1015, 1081, 1055],
-          },
-        ],
-      };
-    return (
+  const chartData6: ChartData<"pie", number[]> = {
+    labels: ["A", "B", "C", "D", "E"],
+    datasets: [
+      {
+        label: "label1",
+        backgroundColor: "rgba(154,178,96,0.5)",
+        hoverBackgroundColor: "rgba(154,178,96,1)",
+        data: [1000, 1015, 1015, 1081, 1055],
+      },
+    ],
+  };
+  const chartData7: ChartData<"doughnut", number[]> = {
+    labels: ["A", "B", "C", "D", "E"],
+    datasets: [
+      {
+        label: "label1",
+        backgroundColor: "rgba(154,178,96,0.5)",
+        hoverBackgroundColor: "rgba(154,178,96,1)",
+        data: [1000, 1015, 1015, 1081, 1055],
+      },
+    ],
+  };
+  const chartData8: ChartData<"radar", number[]> = {
+    labels: ["A", "B", "C", "D", "E"],
+    datasets: [
+      {
+        label: "label1",
+        backgroundColor: "rgba(154,178,96,0.5)",
+        hoverBackgroundColor: "rgba(154,178,96,1)",
+        data: [1000, 1015, 1015, 1081, 1055],
+      },
+    ],
+  };
+
+  const handleDownload = () => {
+    if (chartRef.current) {
+      const link = document.createElement("a");
+      link.href = chartRef.current.toBase64Image(); // 將 chart 轉換為 Base64 圖片
+      link.download = "chart.png"; // 設定下載檔案的名稱
+      link.click();
+    }
+  };
+  return (
     <>
       <div className="mx-auto">
         <div className="text-center font-bold text-3xl">Line</div>
+        <button className="ms-[44.5%] bg-sky-500 rounded-md p-4 text-white" onClick={handleDownload}>Download Chart as PNG</button>
         <div className="w-1/3 mx-auto">
-          <Line data={chartData4} />
+          <Line ref={chartRef} data={chartData4} />
         </div>
         <div className="text-center font-bold text-3xl">Bar</div>
         <div className="w-1/3 mx-auto">
